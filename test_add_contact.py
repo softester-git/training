@@ -13,9 +13,7 @@ class TestAddGroup(unittest.TestCase):
 
     def test_add_contact(self):
         wd = self.wd
-        self.open_home_page(wd)
         self.login(wd, username="admin", password="secret")
-        self.open_contacts_page(wd)
         self.create_contact(wd, Contact(firstname="Firstname",
                                         middlename="Middlename",
                                         lastname="lastname",
@@ -41,16 +39,12 @@ class TestAddGroup(unittest.TestCase):
                                         address2="Address2",
                                         phone2="104",
                                         notes="Notes"))
-        self.return_to_home_page(wd)
         self.logout(wd)
 
     def test_add_empty_contact(self):
         wd = self.wd
-        self.open_home_page(wd)
         self.login(wd, username="admin", password="secret")
-        self.open_contacts_page(wd)
         self.create_contact(wd, Contact(firstname="", middlename="", lastname="", nickname=""))
-        self.return_to_home_page(wd)
         self.logout(wd)
 
     def logout(self, wd):
@@ -60,6 +54,7 @@ class TestAddGroup(unittest.TestCase):
         wd.find_element_by_link_text("home page").click()
 
     def create_contact(self, wd, contact):
+        self.open_contacts_page(wd)
         # fill contact form
         wd.find_element_by_name("firstname").click()
         wd.find_element_by_name("firstname").clear()
@@ -130,11 +125,13 @@ class TestAddGroup(unittest.TestCase):
         wd.find_element_by_name("notes").send_keys(contact.notes) if contact.notes is not None else ""
         # submit group creation
         wd.find_element_by_name("submit").click()
+        self.return_to_home_page(wd)
 
     def open_contacts_page(self, wd):
         wd.find_element_by_link_text("add new").click()
 
     def login(self, wd, username, password):
+        self.open_home_page(wd)
         wd.find_element_by_name("user").click()
         wd.find_element_by_name("user").clear()
         wd.find_element_by_name("user").send_keys(username)
