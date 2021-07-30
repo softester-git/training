@@ -12,9 +12,8 @@ class TestAddGroup(unittest.TestCase):
         self.wd.implicitly_wait(30)
 
     def test_add_contact(self):
-        wd = self.wd
-        self.login(wd, username="admin", password="secret")
-        self.create_contact(wd, Contact(firstname="Firstname",
+        self.login(username="admin", password="secret")
+        self.create_contact(Contact(firstname="Firstname",
                                         middlename="Middlename",
                                         lastname="lastname",
                                         nickname="Nickname",
@@ -39,22 +38,24 @@ class TestAddGroup(unittest.TestCase):
                                         address2="Address2",
                                         phone2="104",
                                         notes="Notes"))
-        self.logout(wd)
+        self.logout()
 
     def test_add_empty_contact(self):
-        wd = self.wd
-        self.login(wd, username="admin", password="secret")
-        self.create_contact(wd, Contact(firstname="", middlename="", lastname="", nickname=""))
-        self.logout(wd)
+        self.login(username="admin", password="secret")
+        self.create_contact(Contact(firstname="", middlename="", lastname="", nickname=""))
+        self.logout()
 
-    def logout(self, wd):
+    def logout(self):
+        wd = self.wd
         wd.find_element_by_link_text("Logout").click()
 
-    def return_to_home_page(self, wd):
+    def return_to_home_page(self):
+        wd = self.wd
         wd.find_element_by_link_text("home page").click()
 
-    def create_contact(self, wd, contact):
-        self.open_contacts_page(wd)
+    def create_contact(self, contact):
+        wd = self.wd
+        self.open_contacts_page()
         # fill contact form
         wd.find_element_by_name("firstname").click()
         wd.find_element_by_name("firstname").clear()
@@ -125,13 +126,15 @@ class TestAddGroup(unittest.TestCase):
         wd.find_element_by_name("notes").send_keys(contact.notes) if contact.notes is not None else ""
         # submit group creation
         wd.find_element_by_name("submit").click()
-        self.return_to_home_page(wd)
+        self.return_to_home_page()
 
-    def open_contacts_page(self, wd):
+    def open_contacts_page(self):
+        wd = self.wd
         wd.find_element_by_link_text("add new").click()
 
-    def login(self, wd, username, password):
-        self.open_home_page(wd)
+    def login(self, username, password):
+        wd = self.wd
+        self.open_home_page()
         wd.find_element_by_name("user").click()
         wd.find_element_by_name("user").clear()
         wd.find_element_by_name("user").send_keys(username)
@@ -140,7 +143,8 @@ class TestAddGroup(unittest.TestCase):
         wd.find_element_by_name("pass").send_keys(password)
         wd.find_element_by_xpath("//input[@value='Login']").click()
 
-    def open_home_page(self, wd):
+    def open_home_page(self):
+        wd = self.wd
         wd.get("https://localhost/addressbook/index.php")
 
     def tearDown(self):
