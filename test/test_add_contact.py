@@ -1,6 +1,6 @@
 import pytest
 from model.contact import Contact
-from application import Application
+from fixture.application import Application
 
 
 @pytest.fixture
