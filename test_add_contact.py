@@ -1,5 +1,5 @@
 import pytest
-from contact import Contact
+from model.contact import Contact
 from application import Application
 
 
