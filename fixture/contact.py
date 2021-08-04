@@ -11,7 +11,7 @@ class ContactHelper:
         wd = self.app.wd
         wd.find_element_by_link_text("home page").click()
 
-    def create_contact(self, contact):
+    def create(self, contact):
         wd = self.app.wd
         self.open_contacts_page()
         # fill contact form
