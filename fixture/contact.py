@@ -92,6 +92,7 @@ class ContactHelper:
 
     def delete_first_contact(self):
         wd = self.app.wd
+        self.app.open_home_page()
         wd.find_element_by_name("selected[]").click()
         # submit deletion
         wd.find_element_by_xpath("//input[@value='Delete']").click()
@@ -100,6 +101,7 @@ class ContactHelper:
 
     def edit_first_contact(self, contact):
         wd = self.app.wd
+        self.app.open_home_page()
         self.open_contacts_edit_page()
         # fill contact form
         wd.find_element_by_name("firstname").click()
