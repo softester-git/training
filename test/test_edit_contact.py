@@ -27,8 +27,7 @@ def test_edit_first_contact(app):
         address2="NewAddress2",
         phone2="114",
         notes="NewNotes"))
-    app.session.logout()
+
 
 def test_edit_empty_first_contact(app):
     app.contact.edit_first_contact(Contact(firstname="", middlename="", lastname="", nickname=""))
-    app.session.logout()

@@ -35,3 +35,10 @@ class Application:
         if text is not None:
             wd.find_element_by_name(field_name).click()
             Select(wd.find_element_by_name(field_name)).select_by_visible_text(text)
+
+    def is_valid(self):
+        try:
+            self.wd.current_url
+            return True
+        except:
+            return False
