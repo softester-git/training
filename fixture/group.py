@@ -19,15 +19,17 @@ class GroupHelper:
         self.return_to_groups_page()
 
     def fill_group_form(self, group):
-        wd.find_element_by_name("group_name").click()
-        wd.find_element_by_name("group_name").clear()
-        wd.find_element_by_name("group_name").send_keys(group.name) if group.name is not None else ""
-        wd.find_element_by_name("group_header").click()
-        wd.find_element_by_name("group_header").clear()
-        wd.find_element_by_name("group_header").send_keys(group.header) if group.header is not None else ""
-        wd.find_element_by_name("group_footer").click()
-        wd.find_element_by_name("group_footer").clear()
-        wd.find_element_by_name("group_footer").send_keys(group.footer) if group.footer is not None else ""
+        wd = self.app.wd
+        self.change_field("group_name", group.name)
+        self.change_field("group_header", group.header)
+        self.change_field("group_footer", group.footer)
+
+    def change_field(self, field_name, text):
+        wd = self.app.wd
+        if text is not None:
+            wd.find_element_by_name(field_name).click()
+            wd.find_element_by_name(field_name).clear()
+            wd.find_element_by_name(field_name).send_keys(text)
 
     def open_groups_page(self):
         wd = self.app.wd
