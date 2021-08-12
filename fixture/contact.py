@@ -21,7 +21,8 @@ class ContactHelper:
 
     def open_contacts_page(self):
         wd = self.app.wd
-        wd.find_element_by_link_text("add new").click()
+        if not wd.current_url.endswith("/edit.php") and not len(wd.find_elements_by_name("submit")) > 0:
+            wd.find_element_by_link_text("add new").click()
 
     def delete_first_contact(self):
         wd = self.app.wd
@@ -30,9 +31,13 @@ class ContactHelper:
         # submit deletion
         wd.find_element_by_xpath("//input[@value='Delete']").click()
         wd.switch_to_alert().accept()
-        wd.find_element_by_link_text("home")
-        wd.find_element_by_link_text("home") # что бы не ставить слипы
-        wd.find_element_by_link_text("home").click()
+        self.return_to_home()
+
+    def return_to_home(self):
+        wd = self.app.wd
+        if not wd.current_url.endswith("addressbook/"):
+            wd.find_element_by_link_text("home")
+            wd.find_element_by_link_text("home").click()
 
     def edit_first_contact(self, contact):
         wd = self.app.wd
