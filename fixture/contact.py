@@ -31,6 +31,7 @@ class ContactHelper:
         wd.find_element_by_xpath("//input[@value='Delete']").click()
         wd.switch_to_alert().accept()
         wd.find_element_by_link_text("home")
+        wd.find_element_by_link_text("home") # что бы не ставить слипы
         wd.find_element_by_link_text("home").click()
 
     def edit_first_contact(self, contact):
