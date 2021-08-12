@@ -73,3 +73,8 @@ class ContactHelper:
         self.app.change_field("address2", contact.address2)
         self.app.change_field("phone2", contact.phone2)
         self.app.change_field("notes", contact.notes)
+
+    def count(self):
+        wd = self.app.wd
+        self.app.open_home_page()
+        return len(wd.find_elements_by_name("selected[]"))
