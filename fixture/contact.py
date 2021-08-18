@@ -54,9 +54,12 @@ class ContactHelper:
             wd.find_element_by_link_text("home").click()
 
     def edit_first_contact(self, contact):
+        self.edit_contact_by_index(0, contact)
+
+    def edit_contact_by_index(self, index, contact):
         wd = self.app.wd
         self.app.open_home_page()
-        self.open_contacts_edit_page()
+        self.open_contacts_edit_page_by_index(index)
         self.fill_contact_form(contact)
         # submit group creation
         wd.find_element_by_name("update").click()
@@ -66,6 +69,10 @@ class ContactHelper:
     def open_contacts_edit_page(self):
         wd = self.app.wd
         wd.find_element_by_xpath("//img[@alt='Edit']").click()
+
+    def open_contacts_edit_page_by_index(self, index):
+        wd = self.app.wd
+        wd.find_elements_by_xpath("//img[@alt='Edit']")[index].click()
 
     def fill_contact_form(self, contact):
         wd = self.app.wd
