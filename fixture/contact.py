@@ -18,6 +18,7 @@ class ContactHelper:
         # submit group creation
         wd.find_element_by_name("submit").click()
         self.return_to_home_page()
+        self.contact_cache = None
 
     def open_contacts_page(self):
         wd = self.app.wd
@@ -33,6 +34,7 @@ class ContactHelper:
         wd.switch_to_alert().accept()
         sleep(3)
         self.return_to_home()
+        self.contact_cache = None
 
     def return_to_home(self):
         wd = self.app.wd
@@ -47,6 +49,7 @@ class ContactHelper:
         # submit group creation
         wd.find_element_by_name("update").click()
         self.return_to_home_page()
+        self.contact_cache = None
 
     def open_contacts_edit_page(self):
         wd = self.app.wd
@@ -85,14 +88,17 @@ class ContactHelper:
         self.app.open_home_page()
         return len(wd.find_elements_by_name("selected[]"))
 
+    contact_cache = None
+
     def get_contact_list(self):
-        wd = self.app.wd
-        self.app.open_home_page()
-        list_contact = []
-        for row in wd.find_elements_by_name("entry"):
-            cells = row.find_elements_by_tag_name("td")
-            contact_id = cells[0].find_element_by_tag_name("input").get_attribute("value")
-            last_name = cells[1].text
-            first_name = cells[2].text
-            list_contact.append(Contact(id=contact_id, lastname=last_name, firstname=first_name))
-        return(list_contact)
+        if self.contact_cache is None:
+            wd = self.app.wd
+            self.app.open_home_page()
+            self.contact_cache = []
+            for row in wd.find_elements_by_name("entry"):
+                cells = row.find_elements_by_tag_name("td")
+                contact_id = cells[0].find_element_by_tag_name("input").get_attribute("value")
+                last_name = cells[1].text
+                first_name = cells[2].text
+                self.contact_cache.append(Contact(id=contact_id, lastname=last_name, firstname=first_name))
+        return(list(self.contact_cache))
