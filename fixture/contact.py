@@ -93,5 +93,6 @@ class ContactHelper:
             cells = row.find_elements_by_tag_name("td")
             contact_id = cells[0].find_element_by_tag_name("input").get_attribute("value")
             last_name = cells[1].text
-            list_contact.append(Contact(id=contact_id, lastname=last_name))
+            first_name = cells[2].text
+            list_contact.append(Contact(id=contact_id, lastname=last_name, firstname=first_name))
         return(list_contact)
