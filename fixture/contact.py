@@ -36,6 +36,18 @@ class ContactHelper:
         self.return_to_home()
         self.contact_cache = None
 
+    def delete_contact_by_index(self, index):
+        wd = self.app.wd
+        self.app.open_home_page()
+        # select by index
+        wd.find_elements_by_name("selected[]")[index].click()
+        # submit deletion
+        wd.find_element_by_xpath("//input[@value='Delete']").click()
+        wd.switch_to_alert().accept()
+        sleep(3)
+        self.return_to_home()
+        self.contact_cache = None
+
     def return_to_home(self):
         wd = self.app.wd
         if not wd.current_url.endswith("addressbook/"):
