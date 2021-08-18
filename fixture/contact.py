@@ -1,4 +1,6 @@
 from model.contact import Contact
+from time import sleep
+
 
 class ContactHelper:
 
@@ -29,12 +31,12 @@ class ContactHelper:
         # submit deletion
         wd.find_element_by_xpath("//input[@value='Delete']").click()
         wd.switch_to_alert().accept()
+        sleep(3)
         self.return_to_home()
 
     def return_to_home(self):
         wd = self.app.wd
         if not wd.current_url.endswith("addressbook/"):
-            wd.find_element_by_link_text("home")
             wd.find_element_by_link_text("home").click()
 
     def edit_first_contact(self, contact):
