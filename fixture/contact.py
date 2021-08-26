@@ -119,5 +119,32 @@ class ContactHelper:
                 contact_id = cells[0].find_element_by_tag_name("input").get_attribute("value")
                 last_name = cells[1].text
                 first_name = cells[2].text
-                self.contact_cache.append(Contact(id=contact_id, lastname=last_name, firstname=first_name))
+                all_phones = cells[5].text.splitlines() if cells[5].text != "" else ("","","","")
+                self.contact_cache.append(
+                    Contact(id=contact_id, lastname=last_name, firstname=first_name, home=all_phones[0],
+                            mobile=all_phones[1], work=all_phones[2], phone2=all_phones[3]))
         return(list(self.contact_cache))
+
+    def get_contact_from_edit_page(self, index):
+        wd = self.app.wd
+        self.open_contacts_edit_page_by_index(index)
+        firstname_value = wd.find_element_by_name("firstname").get_attribute("value")
+        lastname_value = wd.find_element_by_name("lastname").get_attribute("value")
+        address_value = wd.find_element_by_name("address").get_attribute("value")
+        id_value = wd.find_element_by_name("id").get_attribute("value")
+        email_value = wd.find_element_by_name("email").get_attribute("value")
+        email2_value = wd.find_element_by_name("email2").get_attribute("value")
+        email3_value = wd.find_element_by_name("email3").get_attribute("value")
+        homephone_value = wd.find_element_by_name("home").get_attribute("value")
+        workphone_value = wd.find_element_by_name("work").get_attribute("value")
+        mobilephone_value = wd.find_element_by_name("mobile").get_attribute("value")
+        secondaryphone_value = wd.find_element_by_name("phone2").get_attribute("value")
+        return(Contact(firstname=firstname_value if firstname_value != "" else None,
+                       lastname=lastname_value if lastname_value != "" else None,
+                       id=id_value if id_value != "" else None,
+                       address=address_value if address_value != "" else None,
+                       home=homephone_value if homephone_value != "" else None,
+                       work=workphone_value if workphone_value != "" else None,
+                       mobile=mobilephone_value if mobilephone_value != "" else None,
+                       phone2=secondaryphone_value if secondaryphone_value != "" else None
+                       ))
