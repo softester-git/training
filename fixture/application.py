@@ -4,6 +4,7 @@ from fixture.session import SessionHelper
 from fixture.group import GroupHelper
 from fixture.contact import ContactHelper
 from selenium.webdriver.support.select import Select
+import re
 
 
 class Application:
@@ -42,3 +43,13 @@ class Application:
             return True
         except:
             return False
+
+    def merge_phones_like_on_home_page(self, cont):
+        merg_phones = "\n".join(filter(lambda x: x != "",
+                                map(lambda x: self.clear(x),
+                                    filter(lambda x: x is not None,
+                                           [cont.home, cont.mobile, cont.work, cont.phone2]))))
+        return(merg_phones if merg_phones != "" else None)
+
+    def clear(self, s):
+        return (re.sub("[() -]", "", s))

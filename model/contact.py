@@ -29,7 +29,8 @@ class Contact:
                  new_group=None,
                  address2=None,
                  phone2=None,
-                 notes=None):
+                 notes=None,
+                 all_phones_from_home=None):
         self.id = id
         self.firstname = firstname
         self.middlename = middlename
@@ -57,9 +58,10 @@ class Contact:
         self.address2 = address2
         self.phone2 = phone2
         self.notes = notes
+        self.all_phones_from_home = all_phones_from_home
 
     def __repr__(self):
-        return("%s:%s:%s" % (self.id, self.lastname, self.firstname))
+        return("%s:%s:%s:%s:%s:%s:%s" % (self.id, self.lastname, self.firstname, self.home, self.work, self.mobile, self.phone2))
 
     def __eq__(self, other):
         return((self.id is None or other.id is None or self.id == other.id) and self.lastname == other.lastname and self.firstname == other.firstname)
