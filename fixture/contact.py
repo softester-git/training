@@ -1,5 +1,6 @@
 from model.contact import Contact
 from time import sleep
+import re
 
 
 class ContactHelper:
@@ -74,6 +75,10 @@ class ContactHelper:
         wd = self.app.wd
         wd.find_elements_by_xpath("//img[@alt='Edit']")[index].click()
 
+    def open_contacts_view_page_by_index(self, index):
+        wd = self.app.wd
+        wd.find_elements_by_xpath("//img[@alt='Details']")[index].click()
+
     def fill_contact_form(self, contact):
         wd = self.app.wd
         self.app.change_field("firstname", contact.firstname)
@@ -127,6 +132,7 @@ class ContactHelper:
 
     def get_contact_from_edit_page(self, index):
         wd = self.app.wd
+        self.return_to_home()
         self.open_contacts_edit_page_by_index(index)
         firstname_value = wd.find_element_by_name("firstname").get_attribute("value")
         lastname_value = wd.find_element_by_name("lastname").get_attribute("value")
@@ -148,3 +154,26 @@ class ContactHelper:
                        mobile=mobilephone_value if mobilephone_value != "" else None,
                        phone2=secondaryphone_value if secondaryphone_value != "" else None
                        ))
+
+    def get_contact_from_view_page(self, index):
+        wd = self.app.wd
+        self.return_to_home()
+        self.open_contacts_view_page_by_index(index)
+        text = wd.find_element_by_id("content").text
+        try:
+            home = re.search("H: (.*)", text).group(1)
+        except:
+            home = None
+        try:
+            work = re.search("W: (.*)", text).group(1)
+        except:
+            work = None
+        try:
+            mobile = re.search("M: (.*)", text).group(1)
+        except:
+            mobile = None
+        try:
+            phone2 = re.search("P: (.*)", text).group(1)
+        except:
+            phone2 = None
+        return(Contact(home=home, work=work, mobile=mobile, phone2=phone2))
