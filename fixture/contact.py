@@ -122,11 +122,14 @@ class ContactHelper:
             for row in wd.find_elements_by_name("entry"):
                 cells = row.find_elements_by_tag_name("td")
                 contact_id = cells[0].find_element_by_tag_name("input").get_attribute("value")
+
                 last_name = cells[1].text
                 first_name = cells[2].text
-                all_phones = cells[5].text if cells[5].text != "" else None
+                address = cells[3].text
+                all_emails = cells[4].text
+                all_phones = cells[5].text
                 self.contact_cache.append(
-                    Contact(id=contact_id, lastname=last_name, firstname=first_name, all_phones_from_home=all_phones))
+                    Contact(id=contact_id, lastname=last_name, firstname=first_name, address=address, all_phones_from_home=all_phones, all_emails_from_home=all_emails))
         return(list(self.contact_cache))
 
     def get_contact_from_edit_page(self, index):
@@ -144,14 +147,14 @@ class ContactHelper:
         workphone_value = wd.find_element_by_name("work").get_attribute("value")
         mobilephone_value = wd.find_element_by_name("mobile").get_attribute("value")
         secondaryphone_value = wd.find_element_by_name("phone2").get_attribute("value")
-        return(Contact(firstname=firstname_value if firstname_value != "" else None,
-                       lastname=lastname_value if lastname_value != "" else None,
+        return(Contact(firstname=firstname_value,
+                       lastname=lastname_value,
                        id=id_value if id_value != "" else None,
-                       address=address_value if address_value != "" else None,
-                       home=homephone_value if homephone_value != "" else None,
-                       work=workphone_value if workphone_value != "" else None,
-                       mobile=mobilephone_value if mobilephone_value != "" else None,
-                       phone2=secondaryphone_value if secondaryphone_value != "" else None
+                       address=address_value,
+                       home=homephone_value,
+                       work=workphone_value,
+                       mobile=mobilephone_value,
+                       phone2=secondaryphone_value
                        ))
 
     def get_contact_from_view_page(self, index):
@@ -162,17 +165,17 @@ class ContactHelper:
         try:
             home = re.search("H: (.*)", text).group(1)
         except:
-            home = None
+            home = ""
         try:
             work = re.search("W: (.*)", text).group(1)
         except:
-            work = None
+            work = ""
         try:
             mobile = re.search("M: (.*)", text).group(1)
         except:
-            mobile = None
+            mobile = ""
         try:
             phone2 = re.search("P: (.*)", text).group(1)
         except:
-            phone2 = None
+            phone2 = ""
         return(Contact(home=home, work=work, mobile=mobile, phone2=phone2))

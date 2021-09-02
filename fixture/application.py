@@ -49,7 +49,7 @@ class Application:
                                 map(lambda x: self.clear(x),
                                     filter(lambda x: x is not None,
                                            [cont.home, cont.mobile, cont.work, cont.phone2]))))
-        return(merg_phones if merg_phones != "" else None)
+        return(merg_phones)
 
     def clear(self, s):
         return (re.sub("[() -]", "", s))
