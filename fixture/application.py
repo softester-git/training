@@ -51,5 +51,11 @@ class Application:
                                            [cont.home, cont.mobile, cont.work, cont.phone2]))))
         return(merg_phones)
 
+    def merge_emails_like_on_home_page(self, cont):
+        merg_emails = "\n".join(filter(lambda x: x != "",
+                                       filter(lambda x: x is not None,
+                                              [cont.email, cont.email2, cont.email3])))
+        return(merg_emails)
+
     def clear(self, s):
         return (re.sub("[() -]", "", s))
