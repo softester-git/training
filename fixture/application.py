@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 from selenium import webdriver
+from selenium.webdriver.chrome.options import Options
 from fixture.session import SessionHelper
 from fixture.group import GroupHelper
 from fixture.contact import ContactHelper
@@ -11,17 +12,29 @@ import string
 
 class Application:
 
-    def __init__(self):
-        self.wd = webdriver.Firefox()
+    def __init__(self, browser, baseUrl):
+        if browser == "firefox":
+            self.wd = webdriver.Firefox()
+        elif browser == "chrome":
+            options = Options()
+            options.binary_location = "/usr/bin/google-chrome-stable"
+            options.add_argument("--no-sandbox")
+            options.add_argument("--disable-dev-shm-usage")
+            self.wd = webdriver.Chrome(chrome_options=options, executable_path=r'/usr/local/bin/chromedriver')
+        elif browser == "ie":
+            self.wd = webdriver.Ie()
+        else:
+            raise ValueError("Unrecognized browser %s" % browser)
         self.wd.implicitly_wait(1)
         self.session = SessionHelper(self)
         self.group = GroupHelper(self)
         self.contact = ContactHelper(self)
+        self.baseUrl = baseUrl
 
     # common
     def open_home_page(self):
         wd = self.wd
-        wd.get("https://localhost/addressbook/index.php")
+        wd.get(self.baseUrl)
 
     def destroy(self):
         self.wd.quit()
