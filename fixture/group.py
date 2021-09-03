@@ -1,5 +1,6 @@
 from model.group import Group
-
+import random
+import string
 
 class GroupHelper:
 
@@ -87,3 +88,7 @@ class GroupHelper:
                 id = element.find_element_by_name("selected[]").get_attribute("value")
                 self.group_cache.append(Group(name=text, id=id, header="", footer=""))
         return(list(self.group_cache))
+
+    def random_string(prefix, maxlen):
+        symbols = string.ascii_letters + string.digits + " " * 10
+        return (prefix + "".join([random.choice(symbols) for i in range(random.randrange(maxlen))]))

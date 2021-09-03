@@ -1,6 +1,8 @@
 from model.contact import Contact
 from time import sleep
 import re
+import random
+import string
 
 
 class ContactHelper:
@@ -181,3 +183,15 @@ class ContactHelper:
         except:
             phone2 = ""
         return(Contact(home=home, work=work, mobile=mobile, phone2=phone2))
+
+    def random_string(prefix, maxlen):
+        symbols = string.ascii_letters + string.digits + " " * 10
+        return (prefix + "".join([random.choice(symbols) for i in range(random.randrange(maxlen))]))
+
+    def random_digit(maxlen):
+        symbols = string.digits
+        return ("".join([random.choice(symbols) for i in range(random.randrange(maxlen))]))
+
+    def random_month():
+        symbols = ["January","February","March","April","May","June","July","August","September","October","November","December"]
+        return (random.choice(symbols))

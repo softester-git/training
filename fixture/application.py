@@ -5,6 +5,8 @@ from fixture.group import GroupHelper
 from fixture.contact import ContactHelper
 from selenium.webdriver.support.select import Select
 import re
+import random
+import string
 
 
 class Application:
