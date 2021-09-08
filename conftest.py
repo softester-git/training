@@ -16,8 +16,8 @@ def app(request):
     if target is None:
         root_path = os.path.dirname(os.path.abspath(__file__))
         config_file = os.path.join(root_path, request.config.getoption("--target"))
-        with open(config_file) as config_file:
-            target = json.load(config_file)
+        with open(config_file) as f:
+            target = json.load(f)
     if fixture is None or not fixture.is_valid():
         fixture = Application(browser=browser, baseUrl=target["baseUrl"], photoPath=root_path)
     fixture.session.ensure_login(username=target["username"], password=target["password"])
