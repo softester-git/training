@@ -77,8 +77,12 @@ class Application:
     def merge_emails_like_on_home_page(self, cont):
         merg_emails = "\n".join(filter(lambda x: x != "",
                                        filter(lambda x: x is not None,
-                                              [cont.email, cont.email2, cont.email3])))
+                                              [self.merge_text_like_on_home_page(cont.email), self.merge_text_like_on_home_page(cont.email2), self.merge_text_like_on_home_page(cont.email3)])))
         return(merg_emails)
 
     def clear(self, s):
         return (re.sub("[() -]", "", s))
+
+    def merge_text_like_on_home_page(self, text):
+        merge_text = ' '.join(text.split())
+        return(merge_text)
