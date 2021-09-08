@@ -12,7 +12,7 @@ import string
 
 class Application:
 
-    def __init__(self, browser, baseUrl):
+    def __init__(self, browser, baseUrl, photoPath):
         if browser == "firefox":
             self.wd = webdriver.Firefox()
         elif browser == "chrome":
@@ -30,6 +30,8 @@ class Application:
         self.group = GroupHelper(self)
         self.contact = ContactHelper(self)
         self.baseUrl = baseUrl
+        self.photoPath = photoPath
+
 
     # common
     def open_home_page(self):
@@ -43,6 +45,12 @@ class Application:
         wd = self.wd
         if text is not None:
             wd.find_element_by_name(field_name).click()
+            wd.find_element_by_name(field_name).clear()
+            wd.find_element_by_name(field_name).send_keys(text)
+
+    def change_field_photo(self, field_name, text):
+        wd = self.wd
+        if text is not None:
             wd.find_element_by_name(field_name).clear()
             wd.find_element_by_name(field_name).send_keys(text)
 

@@ -8,7 +8,7 @@ testdata = [Contact(firstname="", address="", lastname="")] + [Contact(firstname
                                                                           address=ContactHelper.random_string("address", 20),
                                                                           lastname=ContactHelper.random_string("lastname", 10),
                                                                           nickname=ContactHelper.random_string("nickname", 10),
-                                                                        middlename=ContactHelper.random_string("title", 10),
+                                                                        middlename=ContactHelper.random_string("middlename", 10),
                                                                        title=ContactHelper.random_string("title", 10),
                                                                        home=random.randrange(10),
                                                                        fax=random.randrange(10),

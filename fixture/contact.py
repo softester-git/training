@@ -3,6 +3,7 @@ from time import sleep
 import re
 import random
 import string
+import os.path
 
 
 class ContactHelper:
@@ -87,7 +88,8 @@ class ContactHelper:
         self.app.change_field("middlename", contact.middlename)
         self.app.change_field("lastname", contact.lastname)
         self.app.change_field("nickname", contact.nickname)
-        #wd.find_element_by_name("photo").send_keys(os.path.abspath(contact.photo)) if contact.photo is not None else ""
+        photo_path = os.path.join(str(self.app.photoPath), str(contact.photo)) if contact.photo is not None else None
+        self.app.change_field_photo("photo", photo_path)
         self.app.change_field("title", contact.title)
         self.app.change_field("company", contact.company)
         self.app.change_field("address", contact.address)
