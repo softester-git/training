@@ -71,7 +71,7 @@ class Application:
         merg_phones = "\n".join(filter(lambda x: x != "",
                                 map(lambda x: self.clear(x),
                                     filter(lambda x: x is not None,
-                                           [cont.home, cont.mobile, cont.work, cont.phone2]))))
+                                           [self.merge_text_like_on_home_page(cont.home), self.merge_text_like_on_home_page(cont.mobile), self.merge_text_like_on_home_page(cont.work), self.merge_text_like_on_home_page(cont.phone2)]))))
         return(merg_phones)
 
     def merge_emails_like_on_home_page(self, cont):
