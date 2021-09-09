@@ -68,6 +68,10 @@ class Application:
             return False
 
     def merge_phones_like_on_home_page(self, cont):
+        cont.home = "+" + cont.home[2:] if cont.home.startswith("00") else cont.home
+        cont.mobile = "+" + cont.mobile[2:] if cont.mobile.startswith("00") else cont.mobile
+        cont.work = "+" + cont.work[2:] if cont.work.startswith("00") else cont.work
+        cont.phone2 = "+" + cont.phone2[2:] if cont.phone2.startswith("00") else cont.phone2
         merg_phones = "\n".join(filter(lambda x: x != "",
                                 map(lambda x: self.clear(x),
                                     filter(lambda x: x is not None,
