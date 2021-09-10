@@ -15,8 +15,8 @@ def app(request):
     global fixture
     global target
     browser = request.config.getoption("--browser")
+    root_path = os.path.dirname(os.path.abspath(__file__))
     if target is None:
-        root_path = os.path.dirname(os.path.abspath(__file__))
         config_file = os.path.join(root_path, request.config.getoption("--target"))
         with open(config_file) as f:
             target = json.load(f)
