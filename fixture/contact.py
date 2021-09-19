@@ -52,6 +52,18 @@ class ContactHelper:
         self.return_to_home()
         self.contact_cache = None
 
+    def delete_contact_by_id(self, id):
+        wd = self.app.wd
+        self.app.open_home_page()
+        # select by index
+        wd.find_element_by_xpath("//input[@value='" + id + "']").click()
+        # submit deletion
+        wd.find_element_by_xpath("//input[@value='Delete']").click()
+        wd.switch_to_alert().accept()
+        sleep(3)
+        self.return_to_home()
+        self.contact_cache = None
+
     def return_to_home(self):
         wd = self.app.wd
         if not wd.current_url.endswith("addressbook/"):
@@ -59,6 +71,16 @@ class ContactHelper:
 
     def edit_first_contact(self, contact):
         self.edit_contact_by_index(0, contact)
+
+    def edit_contact_by_id(self, id, contact):
+        wd = self.app.wd
+        self.app.open_home_page()
+        self.open_contacts_edit_page_by_id(id)
+        self.fill_contact_form(contact)
+        # submit group creation
+        wd.find_element_by_name("update").click()
+        self.return_to_home_page()
+        self.contact_cache = None
 
     def edit_contact_by_index(self, index, contact):
         wd = self.app.wd
@@ -77,6 +99,10 @@ class ContactHelper:
     def open_contacts_edit_page_by_index(self, index):
         wd = self.app.wd
         wd.find_elements_by_xpath("//img[@alt='Edit']")[index].click()
+
+    def open_contacts_edit_page_by_id(self, id):
+        wd = self.app.wd
+        wd.find_element_by_xpath("//a[@href='edit.php?id=" + str(id) + "']").click()
 
     def open_contacts_view_page_by_index(self, index):
         wd = self.app.wd
