@@ -4,6 +4,7 @@ import re
 import random
 import string
 import os.path
+from selenium.webdriver.support.ui import Select
 
 
 class ContactHelper:
@@ -223,3 +224,24 @@ class ContactHelper:
     def random_month():
         symbols = ["January","February","March","April","May","June","July","August","September","October","November","December"]
         return (random.choice(symbols))
+
+    def select_contact_by_id(self, id):
+        wd = self.app.wd
+        wd.find_element_by_xpath("//input[@value='" + str(id) + "']").click()
+
+    def del_relation(self, group, contact):
+        wd = self.app.wd
+        self.return_to_home()
+        wd.find_element_by_name("group").click()
+        Select(wd.find_element_by_name("group")).select_by_value(group.id)
+        wd.find_element_by_id(contact.id).click()
+        wd.find_element_by_name("remove").click()
+        wd.find_element_by_link_text("home").click()
+
+    def add_relation(self, group, contact):
+        wd = self.app.wd
+        self.return_to_home()
+        self.select_contact_by_id(str(contact.id))
+        wd.find_element_by_name("to_group").send_keys(str(group.id))
+        wd.find_element_by_name("add").click()
+        self.return_to_home()
