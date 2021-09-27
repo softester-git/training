@@ -245,3 +245,7 @@ class ContactHelper:
         wd.find_element_by_name("to_group").send_keys(str(group.id))
         wd.find_element_by_name("add").click()
         self.return_to_home()
+
+    def clear_all_phones(self, all_phones):
+        ret = list(map(lambda x: "+" + self.app.clear(x[2:]) if x.startswith("00") else self.app.clear(x), all_phones.split("\n")))
+        return(ret)
