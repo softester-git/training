@@ -242,7 +242,8 @@ class ContactHelper:
         wd = self.app.wd
         self.return_to_home()
         self.select_contact_by_id(str(contact.id))
-        wd.find_element_by_name("to_group").send_keys(str(group.id))
+        wd.find_element_by_name("to_group").click()
+        Select(wd.find_element_by_name("to_group")).select_by_visible_text(group.name)
         wd.find_element_by_name("add").click()
         self.return_to_home()
 

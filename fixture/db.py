@@ -58,17 +58,23 @@ class DbFixture:
             cursor.close()
         return(out)
 
-
     def add_relation(self, group, contact):
         cursor = self.connection.cursor()
-        cursor.execute("insert into address_in_groups (id, group_id, created, deprecated) values (" + str(contact.id) + ", " + str(group.id) + ", now(), '0000-00-00 00:00:00')")
-        cursor.close()
-
+        try:
+            cursor.execute("insert into address_in_groups (id, group_id, created, deprecated) values (" + str(contact.id) + ", " + str(group.id) + ", now(), '0000-00-00 00:00:00')")
+        except:
+            print("error on excecute")
+        finally:
+            cursor.close()
 
     def del_relation(self, group, contact):
         cursor = self.connection.cursor()
-        cursor.execute("delete from address_in_groups where id=" + str(contact.id) + " and group_id=" + str(group.group_id))
-        cursor.close()
+        try:
+            cursor.execute("delete from address_in_groups where id=" + str(contact.id) + " and group_id=" + str(group.group_id))
+        except:
+            print("error on excecute")
+        finally:
+            cursor.close()
 
     def destroy(self):
         self.connection.close()
