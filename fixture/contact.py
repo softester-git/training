@@ -248,5 +248,5 @@ class ContactHelper:
         self.return_to_home()
 
     def clear_all_phones(self, all_phones):
-        ret = list(map(lambda x: "+" + self.app.clear(x[2:]) if x.startswith("00") else self.app.clear(x), all_phones.split("\n")))
+        ret = list(map(lambda x: "+" + self.app.clear(x[2:]) if x.startswith("00") else self.app.clear(x), all_phones))
         return(ret)
