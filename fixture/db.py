@@ -76,5 +76,34 @@ class DbFixture:
         finally:
             cursor.close()
 
+    def get_clear_contact(self):
+        cursor = self.connection.cursor()
+        try:
+            cursor.execute("select id, firstname, lastname from addressbook where id not in (select id from address_in_groups)")
+            row = cursor.fetchall()
+            if len(row) == 0:
+                return(False)
+            else:
+                (id, firstname, lastname) = row[0]
+                return(Contact(id=id, firstname=firstname, lastname=lastname))
+        except:
+            print("error on excecute")
+        finally:
+            cursor.close()
+
+    def get_linked_pair(self):
+        cursor = self.connection.cursor()
+        try:
+            cursor.execute("select id, group_id from address_in_groups")
+            row = cursor.fetchall()
+            if len(row) == 0:
+                return(False)
+            else:
+                return(row[0])
+        except:
+            print("error on excecute")
+        finally:
+            cursor.close()
+
     def destroy(self):
         self.connection.close()
