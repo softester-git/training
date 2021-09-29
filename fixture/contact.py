@@ -238,6 +238,7 @@ class ContactHelper:
         wd.find_element_by_name("remove").click()
         wd.find_element_by_link_text("home").click()
 
+
     def add_relation(self, group, contact):
         wd = self.app.wd
         self.return_to_home()
