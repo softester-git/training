@@ -3,3 +3,5 @@ selenium
 jsonpickle
 pony
 mysql-connector
+pytest-allure-adaptor
+lxml
