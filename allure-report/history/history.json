@@ -1,0 +1,122 @@
+{
+  "bf7a780f1ede643879438d6698de871b" : {
+    "statistic" : {
+      "failed" : 0,
+      "broken" : 1,
+      "skipped" : 0,
+      "passed" : 0,
+      "unknown" : 0,
+      "total" : 1
+    },
+    "items" : [ {
+      "uid" : "59cc670a627785e4",
+      "status" : "broken",
+      "statusDetails" : "selenium.common.exceptions.WebDriverException: Message: Process unexpectedly closed with status 1",
+      "time" : {
+        "start" : 1632890777875,
+        "stop" : 1632890777875,
+        "duration" : 0
+      }
+    } ]
+  },
+  "ed7cbe3e865c3abea2a76f3d25ba6d86" : {
+    "statistic" : {
+      "failed" : 0,
+      "broken" : 1,
+      "skipped" : 0,
+      "passed" : 0,
+      "unknown" : 0,
+      "total" : 1
+    },
+    "items" : [ {
+      "uid" : "fa23ac594b31cff9",
+      "status" : "broken",
+      "statusDetails" : "selenium.common.exceptions.WebDriverException: Message: Process unexpectedly closed with status 1",
+      "time" : {
+        "start" : 1632890777565,
+        "stop" : 1632890777565,
+        "duration" : 0
+      }
+    } ]
+  },
+  "115cad1e2344c2658723c201bd89c2cd" : {
+    "statistic" : {
+      "failed" : 0,
+      "broken" : 1,
+      "skipped" : 0,
+      "passed" : 0,
+      "unknown" : 0,
+      "total" : 1
+    },
+    "items" : [ {
+      "uid" : "d08d6e1490a76221",
+      "status" : "broken",
+      "statusDetails" : "selenium.common.exceptions.WebDriverException: Message: Process unexpectedly closed with status 1",
+      "time" : {
+        "start" : 1632890777229,
+        "stop" : 1632890777229,
+        "duration" : 0
+      }
+    } ]
+  },
+  "970f53ab0f464f6796ded80e9dd74d39" : {
+    "statistic" : {
+      "failed" : 0,
+      "broken" : 1,
+      "skipped" : 0,
+      "passed" : 0,
+      "unknown" : 0,
+      "total" : 1
+    },
+    "items" : [ {
+      "uid" : "e3f89722c5f0d436",
+      "status" : "broken",
+      "statusDetails" : "selenium.common.exceptions.WebDriverException: Message: Process unexpectedly closed with status 1",
+      "time" : {
+        "start" : 1632890777719,
+        "stop" : 1632890777719,
+        "duration" : 0
+      }
+    } ]
+  },
+  "88e71eba3883d6b7c4faf1aa309967a5" : {
+    "statistic" : {
+      "failed" : 0,
+      "broken" : 1,
+      "skipped" : 0,
+      "passed" : 0,
+      "unknown" : 0,
+      "total" : 1
+    },
+    "items" : [ {
+      "uid" : "f06c5f442979db9e",
+      "status" : "broken",
+      "statusDetails" : "selenium.common.exceptions.WebDriverException: Message: Process unexpectedly closed with status 1",
+      "time" : {
+        "start" : 1632890777030,
+        "stop" : 1632890777030,
+        "duration" : 0
+      }
+    } ]
+  },
+  "6fe3bdf8733b4b09b3c9ad61c0b5a151" : {
+    "statistic" : {
+      "failed" : 0,
+      "broken" : 1,
+      "skipped" : 0,
+      "passed" : 0,
+      "unknown" : 0,
+      "total" : 1
+    },
+    "items" : [ {
+      "uid" : "94b608a41f497051",
+      "status" : "broken",
+      "statusDetails" : "selenium.common.exceptions.WebDriverException: Message: Process unexpectedly closed with status 1",
+      "time" : {
+        "start" : 1632890777404,
+        "stop" : 1632890777404,
+        "duration" : 0
+      }
+    } ]
+  }
+}
