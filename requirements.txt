@@ -4,5 +4,4 @@ jsonpickle
 pony
 mysql-connector
 allure-pytest
-pytest-allure-adaptor
 lxml
